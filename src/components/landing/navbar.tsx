@@ -37,7 +37,7 @@ export default function Navbar({ user }: { user?: CustomUser }) {
 
           {user ? (
             <Link href="/dashboard">
-              <Button className="rounded-full hover:scale-105 transition-transform duration-300">
+              <Button className="rounded-full cursor-pointer hover:scale-105 transition-transform duration-300">
                 Dashboard
               </Button>
             </Link>

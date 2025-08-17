@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
-    "name" VARCHAR(191) NOT NULL,
+    "name" VARCHAR(191),
     "email" VARCHAR(191) NOT NULL,
     "image" TEXT,
     "oauth_id" TEXT NOT NULL,
