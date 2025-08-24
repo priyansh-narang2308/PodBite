@@ -3,14 +3,46 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import Loading from "../common/loading";
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
+import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
+import { useRouter } from "next/navigation";
 
-const UrlInput = () => {
+const UrlInput = ({ user }: { user: CustomUser }) => {
+  const router = useRouter();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<AddUrlErrorType>({});
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    try {
+      event.preventDefault();
+      setLoading(true);
+
+      const { data } = await axios.post("/api/add-url", {
+        // har ek video ka url lena hai
+        url: url,
+        user_id: user.id,
+      });
+
+      // output aate hi new chat
+      // backend say data main payload dia to dusra waalaa data vo hai
+      const newChat: ChatType = data?.data;
+
+      if (newChat) {
+        toast.success("Correct URL, redirecting you to the summary page");
+        router.push(`/summary/?id=${newChat.id}`);
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 422) {
+          setErrors(error.response?.data?.errors);
+        } else {
+          toast.error(error.response?.data?.message);
+        }
+      }
+    }
   };
   return (
     <div className="flex justify-center items-center mt-10 w-full">

@@ -3,6 +3,7 @@ import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "@/providers/session-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -31,7 +32,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            {children}
+            <Toaster richColors position="top-right" duration={5000} />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

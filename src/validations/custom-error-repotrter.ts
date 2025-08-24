@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+//JUST COPIED FROM THE DOCS OF VINE
 import { errors } from "@vinejs/vine";
 import { FieldContext, ErrorReporterContract } from "@vinejs/vine/types";
 

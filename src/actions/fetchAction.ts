@@ -14,3 +14,12 @@ export const getUserCoins = unstable_cache(
   // now its fetching from the cache
   { revalidate: 60*60 ,tags:["userCoins"]}
 );
+
+export async function getSummary(id: string): Promise<ChatType | null> {
+  const summary = await prisma.summary.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  return summary;
+}
