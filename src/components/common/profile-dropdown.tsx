@@ -63,13 +63,12 @@ export default function ProfileDropdown({ user }: { user: CustomUser | null }) {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem
-  onClick={() => setOpen(true)}
-  className="flex items-center gap-2 px-3 py-2 rounded-md transition-colors !text-red-500 hover:bg-transparent hover:!text-red-500 cursor-pointer"
->
-  <LogOut className="w-4 h-4 !text-red-500" />
-  Logout
-</DropdownMenuItem>
-
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-2 px-3 py-2 rounded-md transition-colors !text-red-500 hover:bg-transparent hover:!text-red-500 cursor-pointer"
+          >
+            <LogOut className="w-4 h-4 !text-red-500" />
+            Logout
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

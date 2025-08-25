@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { authOptions, CustomSession } from "../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import SummaryBase from "@/components/summary/summary-base";
 
 const Summary = async ({
   searchParams,
@@ -31,6 +32,7 @@ const Summary = async ({
   return (
     <div className="container">
       <DashboardNavbar user={session.user} userCoins={userCoins} />
+      <SummaryBase summary={summary} />
     </div>
   );
 };

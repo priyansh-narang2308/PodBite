@@ -14,9 +14,8 @@ export async function updateSummary(id: string, data: string): Promise<void> {
   });
 }
 
-
-export async function subtractCoins(user_id:string|number):Promise<void> {
-    await prisma.user.update({
+export async function subtractCoins(user_id: string | number): Promise<void> {
+  await prisma.user.update({
     where: {
       id: Number(user_id),
     },
@@ -27,7 +26,6 @@ export async function subtractCoins(user_id:string|number):Promise<void> {
     },
   });
 }
-
 
 export async function addCoins(
   user_id: string | number,
@@ -57,6 +55,6 @@ export async function coinsSpend(
   });
 }
 
-export const clearCache = (key: string) => {
+export const clearCache = async (key: string): Promise<void> => {
   revalidateTag(key);
 };
