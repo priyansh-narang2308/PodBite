@@ -4,13 +4,34 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
-import { Check } from "lucide-react"; // Icon for features
+import { Check } from "lucide-react"; 
+import { toast } from "sonner";
+import axios, { AxiosError } from "axios";
+import getStripe from "@/lib/stripe";
 
 export default function Pricing({ user }: { user?: CustomUser }) {
   const [loading, setLoading] = useState(false);
 
-  const initiatePayment = async (plan: string) => {
-    // Payment logic placeholder (unchanged)
+ const initiatePayment = async (plan: string) => {
+    if (!user) {
+      toast.error("Please login first.");
+    }
+    setLoading(true);
+    try {
+      const { data } = await axios.post("/api/stripe/session", { plan: plan });
+      if (data?.id) {
+        const stripe = await getStripe();
+        await stripe?.redirectToCheckout({ sessionId: data?.id });
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message);
+      } else {
+        toast.error("Something went wrong.please try again!");
+      }
+    }
   };
 
   const plans = [
