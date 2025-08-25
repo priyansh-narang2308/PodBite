@@ -10,12 +10,10 @@ export default function OldSummaryCard({
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6">
-        {/* Title */}
         <h1 className="text-xl font-bold text-gray-900 truncate">
           {summary.title}
         </h1>
 
-        {/* URL */}
         <Link
           href={`/summary?id=${summary.id}`}
           className="block mt-2 text-blue-600 hover:text-blue-800 underline truncate"
@@ -23,7 +21,6 @@ export default function OldSummaryCard({
           {summary.url}
         </Link>
 
-        {/* Footer */}
         <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
           <p>📅 {new Date(summary.created_at).toDateString()}</p>
           <Link

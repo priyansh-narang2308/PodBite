@@ -4,7 +4,6 @@ import ProfileDropdown from "../common/profile-dropdown";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "../mode-toggle";
 
 export default async function DashboardNavbar({
   user,
@@ -41,7 +40,6 @@ export default async function DashboardNavbar({
             />
           </div>
 
-          <ModeToggle />
 
           <ProfileDropdown user={user} />
         </div>
